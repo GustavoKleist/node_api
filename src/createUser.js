@@ -1,12 +1,3 @@
-const express = require('express');
-var router = express.Router()
-const app = express();
-
-const swaggerUi = require('swagger-ui-express'),
-    swaggerDocument = require('./swagger.json');
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 var createUser = function (req, res, next) {
     var user = new User(req.body);
   
@@ -63,20 +54,3 @@ var createUser = function (req, res, next) {
       }
     });
   };
-
-router.route('/users')
-  .post(createUser)
-  .get(getAllUsers);
-
-router.route('/users/:userId')
-  .get(getOneUser)
-  .put(updateUser)
-  .delete(deleteUser);
-
-router.param('userId', getByIdUser);
-
-app.use('/api/v1', router);
-
-
-app.listen(3000);
-module.exports = app;
